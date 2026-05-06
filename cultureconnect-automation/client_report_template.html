@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Crecimiento — CultureConnect AI</title>
+<style>
+  :root {
+    --navy: #0a0e1a;
+    --navy-mid: #12192e;
+    --gold: #c9a227;
+    --teal: #00d4b1;
+    --white: #ffffff;
+    --gray: #8899aa;
+    --light-bg: #f8f9fc;
+    --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: #1a2233;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .header-logo span { color: var(--gold); }
+  .header-meta { text-align: right; font-size: 12px; color: var(--gray); }
+  .header-meta strong { display: block; font-size: 15px; color: var(--white); margin-bottom: 2px; }
+
+  /* ── SCORE HERO ── */
+  .score-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2a4a 100%);
+    color: var(--white);
+    padding: 40px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .score-number {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .score-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+  .score-justification {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: #b0c4d8;
+    font-style: italic;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--navy);
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 16px; }
+
+  /* ── CLIENT INFO GRID ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .info-item label {
+    display: block;
+    font-size: 11px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .info-item value { font-size: 14px; font-weight: 600; color: #1a2233; }
+  .badge-package {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* ── CANAL ANALYSIS ── */
+  .canal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .canal-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .canal-card.highlight { border-color: var(--teal); background: #f0fffe; }
+  .canal-name {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 6px;
+  }
+  .canal-name.is-main { color: var(--teal); }
+  .canal-text { font-size: 13px; color: #2d3748; }
+  .oportunidad-box {
+    background: linear-gradient(135deg, #fff7e0, #fff);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .oportunidad-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  /* ── FLAGS ── */
+  .flag-list { list-style: none; }
+  .flag-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fff5f5;
+    border-left: 3px solid #e53e3e;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #742a2a;
+  }
+  .flag-icon { flex-shrink: 0; }
+
+  /* ── MANYCHAT ── */
+  .keyword-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .keyword-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .keyword-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .keyword-header span { color: var(--gold); }
+  .keyword-body { padding: 12px 14px; }
+  .keyword-field { margin-bottom: 8px; }
+  .keyword-field label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .keyword-field p { font-size: 12px; color: #2d3748; }
+  .response-bubble {
+    background: #f0fffe;
+    border-left: 2px solid var(--teal);
+    padding: 8px 10px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #2d3748;
+    font-style: italic;
+  }
+
+  /* ── CALENDARIO ── */
+  .calendario-table { width: 100%; border-collapse: collapse; }
+  .calendario-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .calendario-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .calendario-table tr:last-child td { border-bottom: none; }
+  .calendario-table tr:nth-child(even) td { background: #f8f9fc; }
+  .dia-badge {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--navy);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .hook-text {
+    background: #fffbeb;
+    border-left: 2px solid var(--gold);
+    padding: 6px 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .caption-block { font-size: 12px; color: #4a5568; margin-bottom: 4px; }
+  .caption-label { font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--gray); }
+  .cta-text {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--teal);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ── TIER RECOMMENDATION ── */
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .tier-box {
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 2px solid var(--border);
+  }
+  .tier-box.recommended { border-color: var(--gold); background: #fffbeb; }
+  .tier-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 4px; }
+  .tier-name { font-size: 20px; font-weight: 800; color: var(--navy); }
+  .tier-box.recommended .tier-name { color: #7b5c00; }
+  .tier-justification {
+    font-size: 13px;
+    color: #4a5568;
+    padding: 12px;
+    background: #f8f9fc;
+    border-radius: 6px;
+    align-self: center;
+  }
+
+  /* ── 30 DÍAS ── */
+  .semana-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .semana-card { border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+  .semana-header {
+    background: var(--navy-mid);
+    color: var(--teal);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .semana-body { padding: 12px; font-size: 12px; color: #2d3748; }
+
+  /* ── INFO REQUERIDA ── */
+  .info-req-list { list-style: none; }
+  .info-req-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #f0f9ff;
+    border-left: 3px solid #3182ce;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #1a365d;
+  }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--navy);
+    color: var(--gray);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .report-footer strong { color: var(--white); }
+
+  /* ── TOKENS META ── */
+  .meta-bar {
+    background: var(--navy-mid);
+    color: var(--gray);
+    font-size: 11px;
+    padding: 8px 40px;
+    display: flex;
+    gap: 24px;
+  }
+  .meta-bar span { color: var(--white); }
+
+  @media print {
+    body { background: white; }
+    .section { box-shadow: none; }
+    .score-hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">Culture<span>Connect</span> AI</div>
+  <div class="header-meta">
+    <strong data-field="client_name">{{CLIENT_NAME}}</strong>
+    ID: <span data-field="client_id">{{CLIENT_ID}}</span> &nbsp;|&nbsp;
+    <span data-field="timestamp">{{TIMESTAMP}}</span>
+  </div>
+</div>
+
+<!-- META BAR -->
+<div class="meta-bar">
+  Tokens usados:
+  Input: <span data-field="tokens_input">{{TOKENS_INPUT}}</span> &nbsp;|&nbsp;
+  Output: <span data-field="tokens_output">{{TOKENS_OUTPUT}}</span> &nbsp;|&nbsp;
+  Paquete: <span data-field="package">{{PACKAGE}}</span>
+</div>
+
+<!-- SCORE HERO -->
+<div class="score-hero">
+  <div class="score-circle">
+    <div class="score-number" data-field="score_diagnostico">{{SCORE}}</div>
+    <div class="score-label">/10</div>
+  </div>
+  <div class="score-justification" data-field="score_justificacion">{{SCORE_JUSTIFICACION}}</div>
+</div>
+
+<div class="container">
+
+  <!-- CLIENT INFO -->
+  <div class="section">
+    <div class="section-title"><span class="icon">👤</span> Información del Cliente</div>
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Negocio</label>
+        <value data-field="legal_name">{{LEGAL_NAME}}</value>
+      </div>
+      <div class="info-item">
+        <label>Industria</label>
+        <value data-field="industry">{{INDUSTRY}}</value>
+      </div>
+      <div class="info-item">
+        <label>Paquete</label>
+        <value><span class="badge-package" data-field="package_selected">{{PACKAGE_SELECTED}}</span></value>
+      </div>
+      <div class="info-item">
+        <label>Email</label>
+        <value data-field="email">{{EMAIL}}</value>
+      </div>
+      <div class="info-item">
+        <label>Teléfono</label>
+        <value data-field="phone">{{PHONE}}</value>
+      </div>
+      <div class="info-item">
+        <label>Fecha Inicio</label>
+        <value data-field="start_date">{{START_DATE}}</value>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANÁLISIS DE CANALES -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span> Análisis de Canales</div>
+    <div class="canal-grid">
+      <div class="canal-card highlight">
+        <div class="canal-name is-main">⭐ Canal Principal</div>
+        <div class="canal-text" data-field="canal_principal">{{CANAL_PRINCIPAL}}</div>
+      </div>
+      <div class="canal-card">
+        <div class="canal-name">Instagram</div>
+        <div class="canal-text" data-field="instagram">{{INSTAGRAM}}</div>
+      </div>
+      <div class="canal-card">
+        <div class="canal-name">Facebook</div>
+        <div class="canal-text" data-field="facebook">{{FACEBOOK}}</div>
+      </div>
+      <div class="canal-card">
+        <div class="canal-name">TikTok</div>
+        <div class="canal-text" data-field="tiktok">{{TIKTOK}}</div>
+      </div>
+    </div>
+    <div class="oportunidad-box">
+      <div class="oportunidad-label">⚡ Oportunidad Inmediata — Esta Semana</div>
+      <div data-field="oportunidad_inmediata">{{OPORTUNIDAD_INMEDIATA}}</div>
+    </div>
+  </div>
+
+  <!-- FLAGS DE RIESGO -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🚩</span> Flags de Riesgo</div>
+    <ul class="flag-list" data-field="flags_riesgo">
+      <!-- Filled dynamically: <li><span class="flag-icon">⚠️</span> FLAG_TEXT</li> -->
+      {{FLAGS_RIESGO}}
+    </ul>
+  </div>
+
+  <!-- ESTRATEGIA MANYCHAT -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🤖</span> Estrategia ManyChat — Keywords</div>
+    <div class="keyword-grid">
+      <!-- KEYWORD 1 -->
+      <div class="keyword-card">
+        <div class="keyword-header">DM: <span data-field="keyword1_palabra">{{KEYWORD1}}</span></div>
+        <div class="keyword-body">
+          <div class="keyword-field">
+            <label>Acción</label>
+            <p data-field="keyword1_accion">{{KEYWORD1_ACCION}}</p>
+          </div>
+          <div class="keyword-field">
+            <label>Respuesta Automática</label>
+            <div class="response-bubble" data-field="keyword1_respuesta">{{KEYWORD1_RESPUESTA}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- KEYWORD 2 -->
+      <div class="keyword-card">
+        <div class="keyword-header">DM: <span data-field="keyword2_palabra">{{KEYWORD2}}</span></div>
+        <div class="keyword-body">
+          <div class="keyword-field">
+            <label>Acción</label>
+            <p data-field="keyword2_accion">{{KEYWORD2_ACCION}}</p>
+          </div>
+          <div class="keyword-field">
+            <label>Respuesta Automática</label>
+            <div class="response-bubble" data-field="keyword2_respuesta">{{KEYWORD2_RESPUESTA}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- KEYWORD 3 -->
+      <div class="keyword-card">
+        <div class="keyword-header">DM: <span data-field="keyword3_palabra">{{KEYWORD3}}</span></div>
+        <div class="keyword-body">
+          <div class="keyword-field">
+            <label>Acción</label>
+            <p data-field="keyword3_accion">{{KEYWORD3_ACCION}}</p>
+          </div>
+          <div class="keyword-field">
+            <label>Respuesta Automática</label>
+            <div class="response-bubble" data-field="keyword3_respuesta">{{KEYWORD3_RESPUESTA}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDARIO SEMANA 1 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📅</span> Calendario — Semana 1</div>
+    <table class="calendario-table">
+      <thead>
+        <tr>
+          <th>Día</th>
+          <th>Plataforma</th>
+          <th>Tipo</th>
+          <th>Hook + Caption + CTA</th>
+        </tr>
+      </thead>
+      <tbody data-field="calendario">
+        <!-- Filled dynamically -->
+        {{CALENDARIO_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TIER RECOMENDADO -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💎</span> Recomendación de Tier</div>
+    <div class="tier-grid">
+      <div>
+        <div class="tier-box" style="margin-bottom:12px;">
+          <div class="tier-tag">Tier Actual</div>
+          <div class="tier-name" data-field="tier_actual">{{TIER_ACTUAL}}</div>
+        </div>
+        <div class="tier-box recommended">
+          <div class="tier-tag">Tier Recomendado</div>
+          <div class="tier-name" data-field="tier_recomendado">{{TIER_RECOMENDADO}}</div>
+        </div>
+      </div>
+      <div class="tier-justification" data-field="tier_justificacion">{{TIER_JUSTIFICACION}}</div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS 30 DÍAS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🗺️</span> Roadmap — Próximos 30 Días</div>
+    <div class="semana-grid">
+      <div class="semana-card">
+        <div class="semana-header">Semana 1</div>
+        <div class="semana-body" data-field="semana_1">{{SEMANA_1}}</div>
+      </div>
+      <div class="semana-card">
+        <div class="semana-header">Semana 2</div>
+        <div class="semana-body" data-field="semana_2">{{SEMANA_2}}</div>
+      </div>
+      <div class="semana-card">
+        <div class="semana-header">Semana 3</div>
+        <div class="semana-body" data-field="semana_3">{{SEMANA_3}}</div>
+      </div>
+      <div class="semana-card">
+        <div class="semana-header">Semana 4</div>
+        <div class="semana-body" data-field="semana_4">{{SEMANA_4}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO REQUERIDA (solo si hay campos vacíos) -->
+  <div class="section" data-show-if="info_requerida">
+    <div class="section-title"><span class="icon">📋</span> Información Pendiente del Cliente</div>
+    <ul class="info-req-list" data-field="info_requerida">
+      {{INFO_REQUERIDA}}
+    </ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <strong>CultureConnect AI</strong> — Reporte generado automáticamente con IA<br>
+  San Antonio, TX · jxaviersolis25@gmail.com · cultureconnectai.net
+</div>
+
+</body>
+</html>

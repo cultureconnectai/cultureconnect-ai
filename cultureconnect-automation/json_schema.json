@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CultureConnect AI — Client JSON Schema",
+  "description": "Schema for validated client data produced by n8n_validation.js (Nodo 1)",
+  "type": "object",
+  "required": ["status", "client_id", "timestamp"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["OK", "ERROR"],
+      "description": "OK = passed validation, ERROR = missing required fields"
+    },
+    "client_id": {
+      "type": "string",
+      "pattern": "^CC-[0-9]+-[A-Z0-9]{5}$",
+      "example": "CC-1714953600000-X7K2P",
+      "description": "Unique identifier generated at intake"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of form submission"
+    },
+    "client_info": {
+      "type": "object",
+      "required": ["legal_name", "email", "phone", "industry"],
+      "properties": {
+        "legal_name": { "type": "string", "description": "Legal business name or owner name" },
+        "dba_name": { "type": "string", "description": "DBA / doing business as name" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "description": "Primary phone number" },
+        "whatsapp": { "type": "string", "description": "WhatsApp number (may differ from phone)" },
+        "address": { "type": "string", "description": "Business address" },
+        "hours": { "type": "string", "description": "Business hours of operation" },
+        "website": { "type": "string", "description": "Existing website URL if any" },
+        "industry": { "type": "string", "description": "Business type/industry (from biz_type field)" },
+        "description": { "type": "string", "description": "Short business description from owner" },
+        "main_contact": { "type": "string", "description": "Name of main point of contact" }
+      }
+    },
+    "social_assets": {
+      "type": "object",
+      "properties": {
+        "instagram_handle": { "type": "string", "description": "Instagram @username" },
+        "instagram_followers": { "type": "string", "description": "Current IG follower count" },
+        "facebook_page": { "type": "string", "description": "Facebook page name or URL" },
+        "facebook_followers": { "type": "string", "description": "Current FB page likes/followers" },
+        "youtube_channel": { "type": "string", "description": "YouTube channel name or URL" },
+        "youtube_subs": { "type": "string", "description": "YouTube subscriber count" },
+        "tiktok_handle": { "type": "string", "description": "TikTok @username" },
+        "tiktok_followers": { "type": "string", "description": "Current TikTok follower count" },
+        "threads_handle": { "type": "string", "description": "Threads username if applicable" },
+        "google_business_status": {
+          "type": "string",
+          "description": "Google Business Profile status",
+          "enum": ["claimed", "unclaimed", "optimized", "[INFO_REQUERIDA]"]
+        },
+        "google_reviews": { "type": "string", "description": "Number of Google reviews" },
+        "google_rating": { "type": "string", "description": "Average Google rating (e.g. 4.7)" }
+      },
+      "additionalProperties": false
+    },
+    "brand_assets": {
+      "type": "object",
+      "properties": {
+        "has_logo": {
+          "type": "string",
+          "description": "Whether client has a logo",
+          "enum": ["yes", "no", "[INFO_REQUERIDA]"]
+        },
+        "logo_delivery": { "type": "string", "description": "How logo will be delivered (email/drive/etc)" },
+        "primary_color": { "type": "string", "description": "Primary brand color (hex or name)" },
+        "secondary_color": { "type": "string", "description": "Secondary brand color" },
+        "font": { "type": "string", "description": "Preferred font name" },
+        "visual_style": {
+          "type": "string",
+          "description": "Overall visual aesthetic",
+          "examples": ["modern", "rustic", "elegant", "bold", "minimalist"]
+        },
+        "visual_references": { "type": "string", "description": "Reference accounts or styles they like" }
+      },
+      "additionalProperties": false
+    },
+    "content_info": {
+      "type": "object",
+      "properties": {
+        "has_existing_content": { "type": "string", "description": "Whether they have existing content ready" },
+        "content_location": { "type": "string", "description": "Where content is stored (Google Drive, phone, etc)" },
+        "recording_frequency": { "type": "string", "description": "How often they can record new content" },
+        "willing_on_camera": { "type": "string", "description": "Whether owner/staff will appear on camera" },
+        "has_employees_for_content": { "type": "string", "description": "Whether employees can help with content creation" },
+        "business_story": { "type": "string", "description": "Origin story of the business" },
+        "existing_testimonials": { "type": "string", "description": "Customer reviews or testimonials they can share" }
+      },
+      "additionalProperties": false
+    },
+    "package_info": {
+      "type": "object",
+      "required": ["package_selected"],
+      "properties": {
+        "package_selected": {
+          "type": "string",
+          "description": "Selected service tier",
+          "enum": ["Starter", "Growth", "Full Autopilot", "Elite"]
+        },
+        "start_date": { "type": "string", "description": "Desired start date" },
+        "payment_method": {
+          "type": "string",
+          "enum": ["credit_card", "bank_transfer", "zelle", "cash", "[INFO_REQUERIDA]"]
+        },
+        "content_approver": { "type": "string", "description": "Who approves content before publishing" },
+        "ads_budget": { "type": "string", "description": "Monthly budget for paid ads if any" },
+        "report_frequency": {
+          "type": "string",
+          "enum": ["weekly", "biweekly", "monthly", "[INFO_REQUERIDA]"]
+        },
+        "comm_preference": {
+          "type": "string",
+          "description": "Preferred communication channel",
+          "enum": ["whatsapp", "email", "phone", "[INFO_REQUERIDA]"]
+        },
+        "response_time": { "type": "string", "description": "Expected response time for approvals" }
+      },
+      "additionalProperties": false
+    },
+    "goals": {
+      "type": "object",
+      "properties": {
+        "primary_goals": { "type": "string", "description": "Main business goals for the next 90 days" },
+        "slow_months": { "type": "string", "description": "Slowest months of the year for the business" },
+        "busy_months": { "type": "string", "description": "Busiest months of the year" },
+        "special_dates": { "type": "string", "description": "Key dates, holidays, or events to promote" },
+        "priority_product": { "type": "string", "description": "Product or service to push hardest" },
+        "wants_online_sales": { "type": "string", "description": "Whether they want to sell online" },
+        "additional_notes": { "type": "string", "description": "Any extra info provided by client" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "status": "OK",
+      "client_id": "CC-1714953600000-X7K2P",
+      "timestamp": "2025-05-06T14:23:00.000Z",
+      "client_info": {
+        "legal_name": "Tacos El Gordo SA",
+        "dba_name": "El Gordo Tacos",
+        "email": "contacto@tacosgordo.com",
+        "phone": "2105551234",
+        "whatsapp": "2105551234",
+        "address": "1234 Culebra Rd, San Antonio TX 78201",
+        "hours": "Lun-Vie 8am-10pm / Sab-Dom 9am-11pm",
+        "website": "[INFO_REQUERIDA]",
+        "industry": "Restaurant / Food Service",
+        "description": "Taquería familiar con 15 años en San Antonio, especialidad en birria y barbacoa.",
+        "main_contact": "Roberto Gonzalez"
+      },
+      "social_assets": {
+        "instagram_handle": "@tacosgordo",
+        "instagram_followers": "3200",
+        "facebook_page": "Tacos El Gordo SA",
+        "facebook_followers": "8700",
+        "youtube_channel": "[INFO_REQUERIDA]",
+        "youtube_subs": "[INFO_REQUERIDA]",
+        "tiktok_handle": "[INFO_REQUERIDA]",
+        "tiktok_followers": "[INFO_REQUERIDA]",
+        "threads_handle": "[INFO_REQUERIDA]",
+        "google_business_status": "claimed",
+        "google_reviews": "142",
+        "google_rating": "4.8"
+      },
+      "brand_assets": {
+        "has_logo": "yes",
+        "logo_delivery": "email",
+        "primary_color": "#CC0000",
+        "secondary_color": "#F5C518",
+        "font": "Impact",
+        "visual_style": "bold",
+        "visual_references": "[INFO_REQUERIDA]"
+      },
+      "content_info": {
+        "has_existing_content": "yes",
+        "content_location": "Google Drive",
+        "recording_frequency": "2-3 times per week",
+        "willing_on_camera": "yes",
+        "has_employees_for_content": "no",
+        "business_story": "Mi abuela empezó vendiendo tacos en Monterrey hace 40 años. Yo traje la receta a San Antonio en 2010.",
+        "existing_testimonials": "yes"
+      },
+      "package_info": {
+        "package_selected": "Growth",
+        "start_date": "2025-06-01",
+        "payment_method": "credit_card",
+        "content_approver": "Roberto Gonzalez",
+        "ads_budget": "300",
+        "report_frequency": "monthly",
+        "comm_preference": "whatsapp",
+        "response_time": "24 hours"
+      },
+      "goals": {
+        "primary_goals": "Crecer en Instagram, llegar a nuevos clientes en el norte de San Antonio, lanzar pedidos online.",
+        "slow_months": "Enero, Febrero",
+        "busy_months": "Mayo (Cinco de Mayo), Septiembre, Diciembre",
+        "special_dates": "Día de Muertos, Navidad, Super Bowl",
+        "priority_product": "Birria con consomé",
+        "wants_online_sales": "yes",
+        "additional_notes": "[INFO_REQUERIDA]"
+      }
+    }
+  ]
+}
